@@ -17,6 +17,7 @@ function Register() {
     passwordErr: null,
     confirm_passwordErr: null,
   });
+  const [view, setView] = useState(false);
 
   const patterns = {
     email: /^([a-z\d.-]+)@([a-z\d-]+).([a-z]{2,8})(.[a-z]{2,8})?$/,
@@ -124,7 +125,7 @@ function Register() {
           </Form.Label>
           <Col sm="10">
             <Form.Control
-              type="password"
+              type={view ? "text" : "password"}
               name="password"
               placeholder="Password"
               onKeyUp={(e) => handleformChanges(e)}
@@ -139,6 +140,16 @@ function Register() {
             )}
           </Col>
         </Form.Group>
+        <div
+          onClick={() => (view ? setView(false) : setView(true))}
+          style={{ cursor: "pointer" }}
+        >
+          {view ? (
+            <i className="fa-solid fa-eye"></i>
+          ) : (
+            <i className="fa-solid fa-eye-slash"></i>
+          )}
+        </div>
         <Form.Group
           as={Row}
           className="mb-3"
@@ -149,7 +160,7 @@ function Register() {
           </Form.Label>
           <Col sm="10">
             <Form.Control
-              type="password"
+              type={view ? "text" : "password"}
               name="confirm_password"
               placeholder="Password"
               onKeyUp={(e) => handleformChanges(e)}
